@@ -2,7 +2,7 @@ import { outputJsonFile } from "./util/json.js";
 import { outputReportMarkdownFile } from "./util/markdown.js";
 import { getReportPdfIncludesTerm } from "./util/report.js";
 
-const run = async (searchTerm, pdfSrcDir = "./pdf", outputDir = "./output") => {
+const run = async (searchTerm, pdfSrcDir, outputDir = "./output") => {
   if (!pdfSrcDir) throw new Error('missing arg "pdfSrcDir"');
   if (!searchTerm) throw new Error('missing arg "searchTerm"');
 
