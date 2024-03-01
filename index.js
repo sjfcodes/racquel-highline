@@ -50,7 +50,6 @@ const run = async (searchTerm, srcDir = "./pdf", outputDir = "./output") => {
   const outputMarkdownFile = (sorted) => {
     const sections = [`# includes keyword: ${searchTerm}`, ""];
     Object.entries(sorted).forEach(([fileName, pages]) => {
-      const fileUrl = `${srcDir}/${fileName}`;
       const year = fileName.substring(0, 4);
       const month = fileName.substring(4, 6);
       const day = fileName.substring(6, 8);
@@ -61,8 +60,10 @@ const run = async (searchTerm, srcDir = "./pdf", outputDir = "./output") => {
       Object.entries(pages).forEach(([pageNumber, lines]) => {
         sections.push(
           "",
-          `- [page ${pageNumber}](${webUrl}#page=${pageNumber})`
+          // `- [page ${pageNumber}](${webUrl}#page=${pageNumber})`
+          `<a href="${webUrl}#page=${pageNumber}" target="_blank">page ${pageNumber}</a>`
         );
+
         Object.entries(lines).forEach(([lineNumber, lineText]) => {
           sections.push(`  - line ${lineNumber}: "${lineText}"`);
         });
@@ -79,5 +80,5 @@ const run = async (searchTerm, srcDir = "./pdf", outputDir = "./output") => {
   console.log("found matches in:", Object.keys(reportAll).length, "files");
 };
 
-// run("racquel", "./test");
-run("racquel", "./pdf");
+run("racquel", "./test");
+// run("racquel", "./pdf");
