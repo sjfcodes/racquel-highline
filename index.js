@@ -57,10 +57,12 @@ const run = async (searchTerm, srcDir = "./pdf", outputDir = "./output") => {
 
       const webUrl = `https://documents.highline.edu/collections/thunderword/${year}/${fileName}`;
 
-      sections.push("", `[${year}-${month}-${day}](${webUrl})`);
-
+      sections.push(`## ${year}-${month}-${day}`);
       Object.entries(pages).forEach(([pageNumber, lines]) => {
-        sections.push(`- page ${pageNumber}`);
+        sections.push(
+          "",
+          `- [page ${pageNumber}](${webUrl}#page=${pageNumber})`
+        );
         Object.entries(lines).forEach(([lineNumber, lineText]) => {
           sections.push(`  - line ${lineNumber}: "${lineText}"`);
         });
@@ -77,5 +79,5 @@ const run = async (searchTerm, srcDir = "./pdf", outputDir = "./output") => {
   console.log("found matches in:", Object.keys(reportAll).length, "files");
 };
 
+// run("racquel", "./test");
 run("racquel", "./pdf");
-// run("the");
